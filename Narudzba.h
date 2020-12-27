@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 #include "ManjeStrukture.h"
 #include "Restoran.h"
 using namespace std;
@@ -67,19 +68,31 @@ public:
     };
     
     void Naplati (float popust){
+        ofstream fajl;
+        fajl.open("Racun.txt");
         this->Popust = popust/100;
         for (int i = 0; i < this->narucenaJela.size(); i++) {
             cout <<"  "<<this->narucenaJela[i].NazivJela <<" "<<this->narucenaJela[i].cijena << " KM"<<endl;
+            fajl << "  " << this->narucenaJela[i].NazivJela << " " << this->narucenaJela[i].cijena << " KM" << endl;
         }
         cout << "--------------------------------" << endl;
+        fajl << "--------------------------------" << endl;
         this->ukupno = this->cijena - (this->cijena * this->Popust) + (this->cijena * this->PDV);
         cout << "Neoporezovano: " <<this->cijena << " KM" << endl;
+        fajl << "Neoporezovano: " << this->cijena << " KM" << endl;
         cout << "PDV: " <<this->PDV << " %" << endl;
+        fajl << "PDV: " << this->PDV << " %" << endl;
         cout << "Popust: "<<this->Popust<<" %"<<endl;
+        fajl << "Popust: " << this->Popust << " %" << endl;
         cout << "Ukupno za naplatu: " <<this->ukupno << " KM" << endl;
+        fajl << "Ukupno za naplatu: " << this->ukupno << " KM" << endl;
         cout << "Datum Izdavanja Racuna: " <<this->narudzbe<<endl;
+        fajl << "Datum Izdavanja Racuna: " << this->narudzbe << endl;
         cout << "Ime konobara: "<<this->getKonobara()<<endl;
+        fajl << "Ime konobara: " << this->getKonobara() << endl;
         cout <<"-------------------------------->"<<endl;
+        fajl << "-------------------------------->";
+        fajl.close();
     }
     
 };
